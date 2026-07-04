@@ -21,8 +21,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         Vector2 moveDir = moveAction.ReadValue<Vector2>();
-        
-        Vector3 
-        
+
+        Vector3 newVel = rb.linearVelocity;
+        newVel.x = moveDir.x * speed;
+        newVel.z = moveDir.y * speed;
+
+        rb.linearVelocity = newVel;
+
     }
 }
