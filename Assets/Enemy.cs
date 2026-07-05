@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float shootCooldown = 4;
     float cooldown;
 
+    [SerializeField] Animator animator;
+
     bool hit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,6 +40,7 @@ public class Enemy : MonoBehaviour
         if (player == null || agent == null)
             return;
         agent.SetDestination(player.transform.position);
+        animator.SetFloat("Speed", agent.hasPath ? agent.speed : 0);
         hit = Physics.Raycast(eyes.position, eyes.transform.forward, out hitInfo, sightDistance);
         if (hit)
         {
@@ -46,6 +49,7 @@ public class Enemy : MonoBehaviour
                 print("Enemy has spotted player");
                 if (cooldown <= 0)
                 {
+                    animator.SetTrigger("Shoot");
                     var clone = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
                     Vector3 bulletVel =  bulletSpeed * shootPoint.forward;
                     clone.GetComponent<Rigidbody>().linearVelocity = bulletVel;

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform shootPoint;
     [SerializeField] InputAction moveAction;
     [SerializeField] InputAction shootAction;
+    [SerializeField] Animator animator;
 
     Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,9 +34,10 @@ public class Player : MonoBehaviour
         newVel.z = moveDir.y * speed;
 
         rb.linearVelocity = newVel;
-
+        animator.SetFloat("Speed",newVel.magnitude);
         if (shootAction.WasPressedThisFrame() && cooldownLeft <= 0) 
         {
+            animator.SetTrigger("Shoot");
             var clone = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
             Vector3 bulletVel = shootPoint.rotation * new Vector3(bulletSpeed, 0, 0);
             clone.GetComponent<Rigidbody>().linearVelocity = bulletVel;
