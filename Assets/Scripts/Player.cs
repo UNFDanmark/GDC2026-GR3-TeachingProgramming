@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] InputAction moveAction;
     [SerializeField] InputAction shootAction;
     [SerializeField] Animator animator;
+    [SerializeField] AudioSource audioSource;
 
     Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
             Vector3 bulletVel = shootPoint.rotation * new Vector3(bulletSpeed, 0, 0);
             clone.GetComponent<Rigidbody>().linearVelocity = bulletVel;
             clone.GetComponent<Bullet>().BulletLifeTime = bulletLifeTime;
+            audioSource.Play();
             cooldownLeft = gunCooldown;
         }
 

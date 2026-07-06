@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
         {
             if (hitInfo.transform.CompareTag("Player"))
             {
-                print("Enemy has spotted player");
+                //print("Enemy has spotted player");
                 if (cooldown <= 0)
                 {
                     animator.SetTrigger("Shoot");

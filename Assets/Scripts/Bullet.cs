@@ -26,5 +26,11 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
             Destroy(collision.gameObject);
+        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<deathhandler>().ActivateDeathScreen();
+            Debug.Log("Player Hit");
+        }
     }
 }
